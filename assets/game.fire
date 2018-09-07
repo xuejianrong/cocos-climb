@@ -1308,7 +1308,9 @@
     "ctrlButtonLabel": {
       "__id__": 20
     },
-    "gameOverNode": null,
+    "gameOverNode": {
+      "__id__": 28
+    },
     "_id": "803FPTuW1I3pPDvh/wnX8P"
   }
 ]
