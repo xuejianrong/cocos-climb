@@ -22,7 +22,7 @@ cc.Class({
   onCollisionEnter: function (other) {
     if (this.node.y >= 300 && this.node.y <= 410) {
       console.log('game over');
-      this.game.getComponent('game').stopGame();
+      // this.game.getComponent('game').stopGame();
     }
   },
 

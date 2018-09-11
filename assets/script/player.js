@@ -13,10 +13,8 @@ cc.Class({
     // 是否触摸中
     isTouch: false,
 
-    game: {
-      default: null,
-      type: cc.Node
-    }
+    game: cc.Node,
+    container: cc.Node,
   },
 
   setJumpAction() {
