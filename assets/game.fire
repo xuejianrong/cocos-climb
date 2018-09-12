@@ -52,7 +52,7 @@
       "z": 0,
       "w": 1
     },
-    "_localZOrder": 2,
+    "_localZOrder": 16,
     "groupIndex": 0,
     "autoReleaseAssets": false,
     "_id": "f449f440-ce2b-463a-a1ac-7cf14be831a9"
@@ -130,7 +130,7 @@
     },
     "_skewX": 0,
     "_skewY": 0,
-    "_localZOrder": 3,
+    "_localZOrder": 17,
     "groupIndex": 0,
     "_id": "a6oO/oPYNA/KE701WxImf7"
   },
@@ -191,7 +191,7 @@
     },
     "_skewX": 0,
     "_skewY": 0,
-    "_localZOrder": 4,
+    "_localZOrder": 18,
     "groupIndex": 0,
     "_id": "5cCWVAL4ZFZbNZxhuUc2A0"
   },
@@ -287,7 +287,7 @@
     },
     "_skewX": 0,
     "_skewY": 0,
-    "_localZOrder": 5,
+    "_localZOrder": 19,
     "groupIndex": 0,
     "_id": "59hY61zQpNUJmxRG/EAZHd"
   },
@@ -357,7 +357,7 @@
     },
     "_skewX": 0,
     "_skewY": 0,
-    "_localZOrder": 6,
+    "_localZOrder": 20,
     "groupIndex": 2,
     "_id": "0diUItaFtCY7ZzPXBGiLcb"
   },
@@ -578,6 +578,7 @@
     "game": {
       "__id__": 2
     },
+    "stairsNum": 6,
     "_id": "a1LXQDG6lP66zuLdQ5mUEO"
   },
   {
@@ -644,7 +645,7 @@
     },
     "_skewX": 0,
     "_skewY": 0,
-    "_localZOrder": 7,
+    "_localZOrder": 21,
     "groupIndex": 0,
     "_id": "468C64spJCpajR/YNYQzbY"
   },
@@ -705,7 +706,7 @@
     },
     "_skewX": 0,
     "_skewY": 0,
-    "_localZOrder": 8,
+    "_localZOrder": 22,
     "groupIndex": 0,
     "_id": "52GVeQHOBOjLl77lttSBIP"
   },
@@ -858,7 +859,7 @@
     },
     "_skewX": 0,
     "_skewY": 0,
-    "_localZOrder": 9,
+    "_localZOrder": 23,
     "groupIndex": 0,
     "_id": "92xS79H0lDcqKSuriU5lgZ"
   },
@@ -931,7 +932,7 @@
     },
     "_skewX": 0,
     "_skewY": 0,
-    "_localZOrder": 10,
+    "_localZOrder": 24,
     "groupIndex": 0,
     "_id": "3dZ2phioBEKYCl6sdK1/v8"
   },
@@ -997,7 +998,7 @@
     },
     "_skewX": 0,
     "_skewY": 0,
-    "_localZOrder": 11,
+    "_localZOrder": 25,
     "groupIndex": 0,
     "_id": "e6WWtcywFGE4qSj0+lAbZN"
   },
@@ -1264,7 +1265,7 @@
     },
     "_skewX": 0,
     "_skewY": 0,
-    "_localZOrder": 12,
+    "_localZOrder": 26,
     "groupIndex": 0,
     "_id": "051Q/0fENMU5mSYtgIvx6d"
   },

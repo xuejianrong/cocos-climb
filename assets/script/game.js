@@ -97,6 +97,7 @@ cc.Class({
     this.player.setPosition(0, this.initY);
 
     this.ctrlButtonLabel.string = '开始游戏';
+    this.gameOverNode.runAction(cc.hide());
     this.status = 0;
   }
 });
