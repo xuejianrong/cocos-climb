@@ -52,7 +52,7 @@ cc.Class({
   },
 
   update (dt) {
-    if (this.isTouch) {
+    if (this.isTouch && this.container.getComponent('container').isStart) {
       this.node.x = this.x;
     }
   },
