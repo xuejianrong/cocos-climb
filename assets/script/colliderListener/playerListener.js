@@ -20,9 +20,10 @@ cc.Class({
     // manager.enabledDrawBoundingBox = true;
   },
   onCollisionEnter: function (other) {
-    if (this.node.y >= 300 && this.node.y <= 410) {
+    const game = this.game.getComponent('game');
+    if (this.node.y >= game.initY && this.node.y <= (game.initY + 110)) {
       console.log('game over');
-      // this.game.getComponent('game').stopGame();
+      this.game.getComponent('game').stopGame();
     }
   },
 

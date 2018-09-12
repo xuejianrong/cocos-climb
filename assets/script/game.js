@@ -29,6 +29,7 @@ cc.Class({
     // },
     // 存在的阶梯数组
     stairs: [cc.Node],
+    initY: 0,
     container: {
       default: null,
       type: cc.Node
@@ -71,7 +72,7 @@ cc.Class({
   startGame() {
     console.log('start game');
     // 设置player初始位置
-    this.player.setPosition(0, 300);
+    this.player.setPosition(0, this.initY);
     // player 开始运动
     this.playerComponent.play();
     // stair移动
@@ -83,7 +84,7 @@ cc.Class({
   // 结束游戏
   stopGame() {
     this.player.stopAllActions();
-    this.unschedule(this.spawnNewMove);
+    this.container.getComponent('container').isStart = false;
     this.ctrl.runAction(cc.show());
     this.ctrlButtonLabel.string = '再来一局';
     this.gameOverNode.runAction(cc.fadeIn(.5));

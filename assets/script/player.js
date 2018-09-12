@@ -18,12 +18,18 @@ cc.Class({
   },
 
   setJumpAction() {
+    // stair跑205(stair的高加上间距)时间就是跳跃上下一回的时间，jumpDuration就是这个时间的一半
+    this.jumpDuration = (205 / this.container.getComponent('container').speed) * .5;
     // 跳跃上升
-    var jumpUp = cc.moveBy(this.jumpDuration, cc.v2(0, this.jumpHeight)).easing(cc.easeCubicActionOut());
+    const jumpUp = cc.moveBy(this.jumpDuration, cc.v2(0, this.jumpHeight)).easing(cc.easeCubicActionOut());
+    // 跳跃前就调整一次位置
+    const startBefore = cc.callFunc(() => {
+      this.container.getComponent('container').adjust();
+    });
     // 下落
-    var jumpDown = cc.moveBy(this.jumpDuration, cc.v2(0, -this.jumpHeight)).easing(cc.easeCubicActionIn());
+    const jumpDown = cc.moveBy(this.jumpDuration, cc.v2(0, -this.jumpHeight)).easing(cc.easeCubicActionIn());
     // 不断重复
-    return cc.repeatForever(cc.sequence(jumpUp, jumpDown));
+    return cc.repeatForever(cc.sequence(cc.spawn(jumpUp, startBefore), jumpDown));
   },
 
   // LIFE-CYCLE CALLBACKS:
@@ -32,7 +38,7 @@ cc.Class({
   },
 
   play() {
-    // 初始化x坐标
+    // 设置初始化x坐标
     this.x = this.node.x;
     // 初始化跳跃动作
     this.node.runAction(this.setJumpAction());

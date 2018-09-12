@@ -2,74 +2,58 @@ cc.Class({
   extends: cc.Component,
 
   properties: {
-    // 障碍物容器个数
-    barrierBoxNum: 10,
-    // 最小、最大障碍数
-    min: 4,
-    max: 5,
+    // 障碍物个数
+    barrierNum: 0,
+    // 障碍位置数
+    posiNum: 0,
     // 障碍位置数组
     barrierPositions: [],
+    barriers: [],
     noBarrier: false,
-
-    // 阶梯的容器
-    // container: {
-    //   default: null,
-    //   type: cc.Node
-    // },
-    // 游戏
-    // game: {
-    //   default: null,
-    //   type: cc.Component
-    // },
+    barrierPrefab: cc.Prefab,
   },
 
   // LIFE-CYCLE CALLBACKS:
 
   onLoad () {
     if (!this.noBarrier) {
-      // 随机障碍和位置
-      // this.random();
-      // 生成障碍物容器
-      // this.createBarrierBox();
-      // 向下滑动
-      // this.node.runAction(this.setMoveAction());
+      // 随机位置
+      this.randomPosition();
+      // 根据随机位置添加障碍物
+      this.createBarrier();
     }
   },
 
   start () {
   },
-
-  // setMoveAction() {
-  //   // 渐现
-  //   const fadeIn = cc.fadeIn(1.0);
-  //   // 移动
-  //   const move = cc.moveTo(3, cc.v2(0, 0));
-  //   // 运动到屏幕外之后，销毁阶梯
-  //   const finished = cc.callFunc(this.moveActionBack, this);
-  //   return cc.spawn(cc.sequence(move, finished), fadeIn);
-  // },
-  // moveActionBack() {
-  //   this.node.destroy();
-  //   this.game.stairs.shift();
-  // },
-  createBarrierBox() {
-  },
-  // 随机障碍数、随机出现障碍物容器，并设置障碍位置数组
-  random() {
-    // 障碍数
-    const num = this.randomNum(this.min, this.max);
-    // 位置
-    while (this.barrierPositions.length < num) {
-      this.randomPosition();
-    }
-  },
-  randomNum(min, max) {
-    return Math.floor(Math.random() * (max + 1 - min) + min);
-  },
+  // 随机出现障碍物位置
   randomPosition() {
-    const ran = this.randomNum(1, this.barrierBoxNum);
-    if (!this.barrierPositions.includes(ran)) this.barrierPositions.push(ran);
-  }
+    this.barrierPositions.length = 0;
+    let arr = [], i = 0, j = 0, ran = 0;
+    while (i < this.posiNum) arr.push(i ++);
+    while (j < this.barrierNum) {
+      ran = parseInt(arr.length * Math.random(), 10);
+      this.barrierPositions.push(arr[ran]);
+      arr.splice(ran, 1);
+      j += 1;
+    }
+    this.barrierPositions.sort((a, b) => (a > b));
+  },
+  createBarrier() {
+    // 如果是重置stair位置的话，barriers里本来就有一些barrier的，所以得用长度去判断是否需要增加
+    // 在setBarrierPosition的时候也需要遍历设置位置，不能在下面的while中设置位置
+    while (this.barrierPositions.length !== this.barriers.length) {
+      const newBarrier = cc.instantiate(this.barrierPrefab);
+      this.barriers.push(newBarrier);
+      this.node.addChild(newBarrier);
+    }
+    this.setBarrierPosition();
+  },
+  setBarrierPosition() {
+    this.barriers.forEach((barrier, i) => {
+      barrier.setPosition(cc.v2(42 + (74 * this.barrierPositions[i]) - 375, 50));
+    });
+  },
 
   // update (dt) {},
 });

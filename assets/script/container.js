@@ -7,6 +7,7 @@ cc.Class({
     isStart: false,
     speed: 0,
     player: cc.Node,
+    game: cc.Node,
   },
   onLoad () {
     this.createStairs();
@@ -27,9 +28,11 @@ cc.Class({
     let i = 0;
     while (i < 6) {
       const newStair = cc.instantiate(this.stairPrefab);
-      // const stairComponent = newStair.getComponent('stair');
+      const stairComponent = newStair.getComponent('stair');
+      stairComponent.game = this.game;
+      if (i < 3) stairComponent.noBarrier = true;
       this.node.addChild(newStair, -1);
-      newStair.setPosition(cc.v2(0, (205 * i) + 180));
+      newStair.setPosition(cc.v2(0, (205 * i) + 90));
       this.stairs.push(newStair);
       i += 1;
     }
@@ -40,18 +43,50 @@ cc.Class({
   },
   move(t) {
     this.stairs.forEach(item => {
-      item.y -= this.speed * t;
+      // this.speed 为358.5 对应的是 减 7.35
+      // 计算7.3的偏差值
+      const diff = ((this.speed - 358.5) / 358.5) * 7.35
+      item.y -= (this.speed - (7.35 + diff)) * t;
     });
   },
   // 检查是否要重置位置
-  checkBgReset(){
-    // var winSize = cc.director.getWinSize();
+  checkBgReset() {
+    // 最下面stair的顶点y坐标
     const first_yMax = this.stairs[0].getBoundingBox().yMax;
+    // 小于0则需要重置
     if (first_yMax <= 0) {
+      // 把第一个取出来放到最后，并重新设置y坐标
       const preFirst = this.stairs.shift();
       this.stairs.push(preFirst);
       const curFirst = this.stairs[4];
-      preFirst.y = curFirst.getBoundingBox().yMax + 205;
+      preFirst.y = curFirst.getBoundingBox().yMax + 115;
+
+      // 修改其他stair参数，并添加和设置障碍的位置
+      const stairComponent = this.stairs[5].getComponent('stair');
+      stairComponent.randomPosition();
+      stairComponent.createBarrier();
     }
-  }
+  },
+
+  // 位置校准：stair的移动与player可能存在偏差
+  adjust() {
+    // 找出距离player初始y坐标与所有stair里y坐标的差值并把差值存到新的数组中
+    const arr = [], arr2 = [];
+    this.stairs.forEach((stairs, i) => {
+      const diff = stairs.y - this.game.getComponent('game').initY;
+      arr.push(Math.abs(diff));
+      arr2.push(diff);
+    });
+    // 得出最小差值
+    const min = Math.min.apply(Math, arr);
+    // 找出最小差值的下标
+    let sub = -1;
+    arr.forEach((item, i) => {
+      if (item === min) {
+        sub = i;
+      }
+    });
+    // 所有stair都作调整
+    this.stairs.forEach(stairs => stairs.y -= arr2[sub]);
+  },
 });
