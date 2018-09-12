@@ -2,10 +2,7 @@ cc.Class({
   extends: cc.Component,
 
   properties: {
-    game: {
-      default: null,
-      type: cc.Node
-    }
+    game: cc.Node
   },
 
   // LIFE-CYCLE CALLBACKS:

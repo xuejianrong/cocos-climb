@@ -30,30 +30,13 @@ cc.Class({
     // 存在的阶梯数组
     stairs: [cc.Node],
     initY: 0,
-    container: {
-      default: null,
-      type: cc.Node
-    },
-    player: {
-      default: null,
-      type: cc.Node
-    },
-    playerComponent: {
-      default: null,
-      type: cc.Component
-    },
-    ctrl: {
-      default: null,
-      type: cc.Node
-    },
-    ctrlButtonLabel: {
-      default: null,
-      type: cc.Label
-    },
-    gameOverNode: {
-      default: null,
-      type: cc.Node
-    }
+    container: cc.Node,
+    player: cc.Node,
+    playerComponent: cc.Component,
+    ctrl: cc.Node,
+    ctrlButtonLabel: cc.Label,
+    gameOverNode: cc.Node,
+    status: 0, // 0 未开始，1 游戏中，2 已结束
   },
 
   // LIFE-CYCLE CALLBACKS:
@@ -61,6 +44,8 @@ cc.Class({
   onLoad () {
     // 设置player组件
     this.playerComponent = this.player.getComponent('player');
+    // 设置player初始位置
+    this.player.setPosition(0, this.initY);
   },
 
   start () {
@@ -68,17 +53,25 @@ cc.Class({
 
   // update (dt) {},
 
+  ctrlButtonHandle() {
+    if (this.status === 0) {
+      this.startGame();
+    } else if (this.status === 2) {
+      this.init();
+    }
+  },
+
   // 开始游戏
   startGame() {
     console.log('start game');
-    // 设置player初始位置
-    this.player.setPosition(0, this.initY);
     // player 开始运动
     this.playerComponent.play();
     // stair移动
     this.container.getComponent('container').startGame();
     // 隐藏控制面板
     this.ctrl.runAction(cc.hide());
+
+    this.status = 1;
   },
 
   // 结束游戏
@@ -88,5 +81,22 @@ cc.Class({
     this.ctrl.runAction(cc.show());
     this.ctrlButtonLabel.string = '再来一局';
     this.gameOverNode.runAction(cc.fadeIn(.5));
+
+    this.status = 2;
   },
+
+  // 点击再玩一次，初始化游戏画面
+  init() {
+    const containerComponent = this.container.getComponent('container');
+    // 在container中删除所有已存在的stair节点
+    containerComponent.stairs.forEach(stair => stair.removeFromParent());
+    // 清空stairs
+    containerComponent.stairs.length = 0;
+    containerComponent.createStairs();
+    // 设置player初始位置
+    this.player.setPosition(0, this.initY);
+
+    this.ctrlButtonLabel.string = '开始游戏';
+    this.status = 0;
+  }
 });
