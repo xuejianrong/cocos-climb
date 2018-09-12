@@ -8,9 +8,12 @@ cc.Class({
     posiNum: 0,
     // 障碍位置数组
     barrierPositions: [],
-    barriers: [],
+    barriers: [cc.Node],
     noBarrier: false,
     barrierPrefab: cc.Prefab,
+    goldPrefab: cc.Prefab,
+    gold: cc.Node,
+    goldPosition: -2,
   },
 
   // LIFE-CYCLE CALLBACKS:
@@ -21,16 +24,23 @@ cc.Class({
       this.randomPosition();
       // 根据随机位置添加障碍物
       this.createBarrier();
+      // 根据随机位置添加金币
+      this.createGold();
     }
   },
 
   start () {
   },
-  // 随机出现障碍物位置
+  // 随机出现障碍、金币位置
   randomPosition() {
     this.barrierPositions.length = 0;
     let arr = [], i = 0, j = 0, ran = 0;
+    // 创建空位置数组
     while (i < this.posiNum) arr.push(i ++);
+    // 随机一个位置作为金币的位置
+    this.goldPosition = parseInt(arr.length * Math.random(), 10);
+    arr.splice(this.goldPosition, 1);
+    // 随机剩余的位置作为障碍的位置，并顺序排序
     while (j < this.barrierNum) {
       ran = parseInt(arr.length * Math.random(), 10);
       this.barrierPositions.push(arr[ran]);
@@ -53,6 +63,14 @@ cc.Class({
     this.barriers.forEach((barrier, i) => {
       barrier.setPosition(cc.v2(42 + (74 * this.barrierPositions[i]) - 375, 50));
     });
+  },
+  createGold() {
+    // 不存在才添加，为了减少节点的添加过程
+    if (!this.gold) {
+      this.gold = cc.instantiate(this.goldPrefab);
+      this.node.addChild(this.gold);
+    }
+    this.gold.setPosition(cc.v2(42 + (74 * this.goldPosition) - 375, 30))
   },
 
   // update (dt) {},

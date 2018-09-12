@@ -73,7 +73,7 @@
     },
     "_skewX": 0,
     "_skewY": 0,
-    "_localZOrder": 89,
+    "_localZOrder": 82,
     "groupIndex": 0,
     "_id": ""
   },
@@ -103,7 +103,7 @@
     "_isTrimmedMode": true,
     "_state": 0,
     "_atlas": null,
-    "_id": "e0aUvezb1IaqZ+8VOFrFsi"
+    "_id": "abyiY/ZE9NcYp3bJILnKdK"
   },
   {
     "__type__": "cc.Layout",
@@ -135,7 +135,7 @@
     "_N$spacingY": 0,
     "_N$verticalDirection": 1,
     "_N$horizontalDirection": 0,
-    "_id": "69CHs9yllAh4oAH00QqrUR"
+    "_id": "59JMR+RGJOfZdg6cwNgqKu"
   },
   {
     "__type__": "dc6b7hiCvlOeJ80aO34fjdB",
@@ -153,7 +153,11 @@
     "barrierPrefab": {
       "__uuid__": "ce64b6af-709a-4712-b140-e4853d2a9195"
     },
-    "_id": "eeWwKwb2dJ9IHaYyi+KSAU"
+    "goldPrefab": {
+      "__uuid__": "fb405fa0-37da-4976-8f35-86d34b247b22"
+    },
+    "goldPosition": -1,
+    "_id": "4d9s50YSZCoYJ5dl3LzOjV"
   },
   {
     "__type__": "cc.PrefabInfo",

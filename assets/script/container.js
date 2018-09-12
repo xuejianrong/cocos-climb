@@ -72,6 +72,7 @@ cc.Class({
       const stairComponent = this.stairs[5].getComponent('stair');
       stairComponent.randomPosition();
       stairComponent.createBarrier();
+      stairComponent.createGold();
     }
   },
 
