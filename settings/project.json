@@ -19,6 +19,13 @@
     [
       false,
       true,
+      false,
+      true
+    ],
+    [
+      false,
+      false,
+      true,
       false
     ]
   ],
@@ -30,7 +37,8 @@
   "group-list": [
     "default",
     "barrier",
-    "player"
+    "player",
+    "gold"
   ],
   "simulator-orientation": false,
   "simulator-resolution": {

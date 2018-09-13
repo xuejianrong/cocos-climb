@@ -9,6 +9,8 @@ cc.Class({
     player: cc.Node,
     game: cc.Node,
     stairsNum: 6,
+    // 轮流出现过多少个阶梯
+    appearStairs: 0,
   },
   onLoad () {
     this.createStairs();
@@ -31,6 +33,7 @@ cc.Class({
       const newStair = cc.instantiate(this.stairPrefab);
       const stairComponent = newStair.getComponent('stair');
       stairComponent.game = this.game;
+      stairComponent.player = this.player;
       if (i < 3) stairComponent.noBarrier = true;
       this.node.addChild(newStair, -1);
       newStair.setPosition(cc.v2(0, (205 * i) + 90));

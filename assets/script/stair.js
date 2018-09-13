@@ -2,6 +2,8 @@ cc.Class({
   extends: cc.Component,
 
   properties: {
+    // 第几个阶梯
+    No: 0,
     // 障碍物个数
     barrierNum: 0,
     // 障碍位置数
@@ -14,6 +16,8 @@ cc.Class({
     goldPrefab: cc.Prefab,
     gold: cc.Node,
     goldPosition: -2,
+    game: cc.Node,
+    player: cc.Node,
   },
 
   // LIFE-CYCLE CALLBACKS:
@@ -69,7 +73,10 @@ cc.Class({
     if (!this.gold) {
       this.gold = cc.instantiate(this.goldPrefab);
       this.node.addChild(this.gold);
+      this.gold.getComponent('goldListener').game = this.game;
+      this.gold.getComponent('goldListener').player = this.player;
     }
+    this.gold.getComponent('goldListener').init();
     this.gold.setPosition(cc.v2(42 + (74 * this.goldPosition) - 375, 30))
   },
 

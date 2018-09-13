@@ -73,7 +73,7 @@
     },
     "_skewX": 0,
     "_skewY": 0,
-    "_localZOrder": 82,
+    "_localZOrder": 105,
     "groupIndex": 0,
     "_id": ""
   },
@@ -103,7 +103,7 @@
     "_isTrimmedMode": true,
     "_state": 0,
     "_atlas": null,
-    "_id": "abyiY/ZE9NcYp3bJILnKdK"
+    "_id": "4aNCbi/oFHTJAZTL23y5QF"
   },
   {
     "__type__": "cc.Layout",
@@ -135,7 +135,7 @@
     "_N$spacingY": 0,
     "_N$verticalDirection": 1,
     "_N$horizontalDirection": 0,
-    "_id": "59JMR+RGJOfZdg6cwNgqKu"
+    "_id": "92RIVa1gdOs5oTDhxXQUHR"
   },
   {
     "__type__": "dc6b7hiCvlOeJ80aO34fjdB",
@@ -154,10 +154,12 @@
       "__uuid__": "ce64b6af-709a-4712-b140-e4853d2a9195"
     },
     "goldPrefab": {
-      "__uuid__": "fb405fa0-37da-4976-8f35-86d34b247b22"
+      "__uuid__": "33846656-67b3-42a6-b6ea-bbebd8b20b21"
     },
+    "gold": null,
     "goldPosition": -1,
-    "_id": "4d9s50YSZCoYJ5dl3LzOjV"
+    "game": null,
+    "_id": "90eJaK22xFhaCsFsYR0/PS"
   },
   {
     "__type__": "cc.PrefabInfo",

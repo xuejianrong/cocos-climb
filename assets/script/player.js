@@ -15,6 +15,11 @@ cc.Class({
 
     game: cc.Node,
     container: cc.Node,
+
+    // 当前第几个阶梯
+    step: 0,
+    // 上一个吃金币的阶梯值
+    preStep: 0,
   },
 
   setJumpAction() {
@@ -28,8 +33,11 @@ cc.Class({
     });
     // 下落
     const jumpDown = cc.moveBy(this.jumpDuration, cc.v2(0, -this.jumpHeight)).easing(cc.easeCubicActionIn());
+    const finished = cc.callFunc(() => {
+      this.step += 1;
+    });
     // 不断重复
-    return cc.repeatForever(cc.sequence(cc.spawn(jumpUp, startBefore), jumpDown));
+    return cc.repeatForever(cc.sequence(cc.spawn(jumpUp, startBefore), jumpDown, finished));
   },
 
   // LIFE-CYCLE CALLBACKS:
@@ -74,5 +82,18 @@ cc.Class({
   touchEndHandle(e) {
     // 设置为触摸结束
     this.isTouch = false;
-  }
+  },
+
+  getGoldHandle() {
+    const game = this.game.getComponent('game');
+    if (this.step === this.preStep + 1) {
+      // 连续  则连续吃金币数+1
+      game.goldContinuousCount += 1;
+    } else {
+      // 不连续  则重置连续吃金币数
+      game.goldContinuousCount = 1;
+    }
+    game.getGoldHandle();
+    this.preStep = this.step;
+  },
 });

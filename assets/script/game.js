@@ -37,21 +37,18 @@ cc.Class({
     ctrlButtonLabel: cc.Label,
     gameOverNode: cc.Node,
     status: 0, // 0 未开始，1 游戏中，2 已结束
+    goldContinuousCount: 0, // 连续获得金币次数
+    score: 0, // 当前分数
+    addCount: 0, // 获得金币时，增加的分数值
+    scoreLabel: cc.Label,
   },
 
-  // LIFE-CYCLE CALLBACKS:
-
-  onLoad () {
+  onLoad() {
     // 设置player组件
     this.playerComponent = this.player.getComponent('player');
     // 设置player初始位置
     this.player.setPosition(0, this.initY);
   },
-
-  start () {
-  },
-
-  // update (dt) {},
 
   ctrlButtonHandle() {
     if (this.status === 0) {
@@ -99,5 +96,20 @@ cc.Class({
     this.ctrlButtonLabel.string = '开始游戏';
     this.gameOverNode.runAction(cc.hide());
     this.status = 0;
-  }
+    this.score = 0;
+    this.scoreLabel.string = 'Score:0';
+  },
+
+  // 获得金币处理函数
+  getGoldHandle() {
+    console.log(this.goldContinuousCount);
+    if (this.goldContinuousCount > 4) {
+      this.addCount = 50;
+    } else {
+      this.addCount = 20 + (this.goldContinuousCount - 1) * 10;
+    }
+    console.log(this.addCount);
+    this.score += this.addCount;
+    this.scoreLabel.string = `Score:${this.score}`;
+  },
 });

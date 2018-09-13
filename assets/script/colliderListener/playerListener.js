@@ -16,11 +16,17 @@ cc.Class({
     // 显示碰撞组件的包围盒
     // manager.enabledDrawBoundingBox = true;
   },
-  onCollisionEnter: function (other) {
+  onCollisionEnter(collider) {
     const game = this.game.getComponent('game');
     if (this.node.y >= game.initY && this.node.y <= (game.initY + 110)) {
-      console.log('game over');
-      this.game.getComponent('game').stopGame();
+      if (collider.node.name === 'barrierItem') {
+        // 碰撞的是障碍
+        console.log('game over');
+        game.stopGame();
+      } else if (collider.node.name === 'gold'){
+        // 碰撞的是金币
+        this.node.getComponent('player').getGoldHandle();
+      }
     }
   },
 
