@@ -98,6 +98,9 @@ cc.Class({
     this.status = 0;
     this.score = 0;
     this.scoreLabel.string = 'Score:0';
+    containerComponent.speed = containerComponent.initSpeed;
+    this.playerComponent.step = 2;
+    this.playerComponent.preStep = 0;
   },
 
   // 获得金币处理函数

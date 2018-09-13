@@ -6,6 +6,9 @@ cc.Class({
     stairs: [cc.Node],
     isStart: false,
     speed: 0,
+    initSpeed: 0, // 用于保存初始化速度
+    addSpeed: 0, // 每次加速需要增加的速度
+    maxSpeed: 0, // 速度上限
     player: cc.Node,
     game: cc.Node,
     stairsNum: 6,
@@ -13,6 +16,7 @@ cc.Class({
     appearStairs: 0,
   },
   onLoad () {
+    this.initSpeed = this.speed;
     this.createStairs();
   },
 
@@ -44,7 +48,6 @@ cc.Class({
   },
   startGame() {
     this.isStart = true;
-    // this.stairs.forEach(item => console.log(item.getBoundingBox()));
   },
   move(t) {
     this.stairs.forEach(item => {

@@ -15,6 +15,7 @@ cc.Class({
 
     game: cc.Node,
     container: cc.Node,
+    containerComponent: cc.Component,
 
     // 当前第几个阶梯
     step: 0,
@@ -24,25 +25,31 @@ cc.Class({
 
   setJumpAction() {
     // stair跑205(stair的高加上间距)时间就是跳跃上下一回的时间，jumpDuration就是这个时间的一半
-    this.jumpDuration = (205 / this.container.getComponent('container').speed) * .5;
+    this.jumpDuration = (205 / this.containerComponent.speed) * .5;
     // 跳跃上升
     const jumpUp = cc.moveBy(this.jumpDuration, cc.v2(0, this.jumpHeight)).easing(cc.easeCubicActionOut());
     // 跳跃前就调整一次位置
     const startBefore = cc.callFunc(() => {
-      this.container.getComponent('container').adjust();
+      this.containerComponent.adjust();
     });
     // 下落
     const jumpDown = cc.moveBy(this.jumpDuration, cc.v2(0, -this.jumpHeight)).easing(cc.easeCubicActionIn());
     const finished = cc.callFunc(() => {
       this.step += 1;
+      // step为4的时候有第一个金币，之后没通过10加一次速，并添加速度上限
+      if ((this.step - 4) % 10 === 0 && this.containerComponent.speed < this.containerComponent.maxSpeed) {
+        this.containerComponent.speed += parseInt(this.step / 10, 10) * this.containerComponent.addSpeed;
+        // 更改速度之后，重新设置动画
+        this.node.stopAllActions();
+        this.node.runAction(this.setJumpAction());
+      }
     });
     // 不断重复
     return cc.repeatForever(cc.sequence(cc.spawn(jumpUp, startBefore), jumpDown, finished));
   },
 
-  // LIFE-CYCLE CALLBACKS:
-
   onLoad () {
+    if (!this.containerComponent) this.containerComponent = this.container.getComponent('container');
   },
 
   play() {
@@ -60,7 +67,7 @@ cc.Class({
   },
 
   update (dt) {
-    if (this.isTouch && this.container.getComponent('container').isStart) {
+    if (this.isTouch && this.containerComponent.isStart) {
       this.node.x = this.x;
     }
   },
@@ -90,6 +97,7 @@ cc.Class({
       // 连续  则连续吃金币数+1
       game.goldContinuousCount += 1;
     } else {
+      console.log('断续了');
       // 不连续  则重置连续吃金币数
       game.goldContinuousCount = 1;
     }
