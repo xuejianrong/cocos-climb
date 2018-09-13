@@ -25,7 +25,18 @@ cc.Class({
         game.stopGame();
       } else if (collider.node.name === 'gold'){
         // 碰撞的是金币
+
+        // player内的监听
         this.node.getComponent('player').getGoldHandle();
+
+        // gold的处理
+        const colliderComponent = collider.node.getComponent('gold');
+        colliderComponent.goldPic.opacity = 0;
+        colliderComponent.scoreLabel.string = `+${game.addCount}`;
+        colliderComponent.addScore.opacity = 255;
+        this.scheduleOnce(_ => {
+          colliderComponent.addScore.opacity = 0;
+        }, .5);
       }
     }
   },

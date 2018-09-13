@@ -102,13 +102,11 @@ cc.Class({
 
   // 获得金币处理函数
   getGoldHandle() {
-    console.log(this.goldContinuousCount);
     if (this.goldContinuousCount > 4) {
       this.addCount = 50;
     } else {
       this.addCount = 20 + (this.goldContinuousCount - 1) * 10;
     }
-    console.log(this.addCount);
     this.score += this.addCount;
     this.scoreLabel.string = `Score:${this.score}`;
   },

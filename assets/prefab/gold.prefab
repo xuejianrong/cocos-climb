@@ -170,7 +170,7 @@
     "_isTrimmedMode": true,
     "_state": 0,
     "_atlas": null,
-    "_id": "9aIff5ej5DFbJJO0JXcLpN"
+    "_id": "9eY3em/q1ONbi7BLH+SVI1"
   },
   {
     "__type__": "cc.PrefabInfo",
@@ -269,7 +269,7 @@
     "_N$verticalAlign": 1,
     "_N$fontFamily": "Arial",
     "_N$overflow": 0,
-    "_id": "0doo3EDTFBMLiHM23/H93a"
+    "_id": "cew/FCrGtL8YTiUAKGyi59"
   },
   {
     "__type__": "cc.PrefabInfo",
@@ -281,28 +281,6 @@
     },
     "fileId": "2biGtDAxRHPr/5mIPiTazM",
     "sync": false
-  },
-  {
-    "__type__": "dfca9TS7SFB0aJfBbb/H5nG",
-    "_name": "",
-    "_objFlags": 0,
-    "node": {
-      "__id__": 1
-    },
-    "_enabled": true,
-    "game": null,
-    "player": null,
-    "addScore": {
-      "__id__": 5
-    },
-    "goldPic": {
-      "__id__": 2
-    },
-    "a": -4.799999999999999,
-    "scoreLabel": {
-      "__id__": 6
-    },
-    "_id": "73CjACaXhJZL21a68d9ys+"
   },
   {
     "__type__": "cc.CircleCollider",
@@ -319,7 +297,28 @@
       "y": 0
     },
     "_radius": 30,
-    "_id": "ae7WcmNvFPwqGjdES+OztZ"
+    "_id": "bcmf+6pWpB4oRv7p31C7ug"
+  },
+  {
+    "__type__": "7b909kT7m9HNrXKFQW1nSLe",
+    "_name": "",
+    "_objFlags": 0,
+    "node": {
+      "__id__": 1
+    },
+    "_enabled": true,
+    "game": null,
+    "player": null,
+    "addScore": {
+      "__id__": 5
+    },
+    "goldPic": {
+      "__id__": 2
+    },
+    "scoreLabel": {
+      "__id__": 6
+    },
+    "_id": "bcDZFOgD9M7p7m2zmt2mI9"
   },
   {
     "__type__": "cc.PrefabInfo",

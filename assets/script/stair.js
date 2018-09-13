@@ -73,10 +73,10 @@ cc.Class({
     if (!this.gold) {
       this.gold = cc.instantiate(this.goldPrefab);
       this.node.addChild(this.gold);
-      this.gold.getComponent('goldListener').game = this.game;
-      this.gold.getComponent('goldListener').player = this.player;
+      this.gold.getComponent('gold').game = this.game;
+      this.gold.getComponent('gold').player = this.player;
     }
-    this.gold.getComponent('goldListener').init();
+    this.gold.getComponent('gold').init();
     this.gold.setPosition(cc.v2(42 + (74 * this.goldPosition) - 375, 30))
   },
 
