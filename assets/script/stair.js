@@ -39,14 +39,15 @@ cc.Class({
   randomPosition() {
     this.barrierPositions.length = 0;
     let arr = [], i = 0, j = 0, ran = 0;
-    // 创建空位置数组
+    // 创建空位置数组 [0, 1, ..., 9]
     while (i < this.posiNum) arr.push(i ++);
-    // 随机一个位置作为金币的位置
-    this.goldPosition = parseInt(arr.length * Math.random(), 10);
+    // 随机一个位置作为金币的位置 去掉头尾各2个
+    this.goldPosition = parseInt((arr.length - 4) * Math.random() + 2, 10);
     arr.splice(this.goldPosition, 1);
     // 随机剩余的位置作为障碍的位置，并顺序排序
     while (j < this.barrierNum) {
-      ran = parseInt(arr.length * Math.random(), 10);
+      // 去掉头尾各1个
+      ran = parseInt((arr.length - 2) * Math.random() + 1, 10);
       this.barrierPositions.push(arr[ran]);
       arr.splice(ran, 1);
       j += 1;
